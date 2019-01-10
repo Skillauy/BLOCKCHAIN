@@ -77,6 +77,8 @@ public class Main extends Application {
 		Button back2 = new Button();
 		back2.setText("Back");
 		
+		
+		
 		//Layout fuer zweite Scene
 		final FlowPane fp2 = new FlowPane();
 		final Scene secondScene = new Scene(fp2, 370, 150);
@@ -85,6 +87,8 @@ public class Main extends Application {
 		fp2.setPadding(new Insets(60,15,15,60));
 	
 		fp2.getChildren().addAll(back2, lb2, anima);
+		
+		//asdfasdfasdf
 		
 		stage.setScene( scene );
 		stage.show();
