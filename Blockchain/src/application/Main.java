@@ -86,7 +86,7 @@ public class Main extends Application {
 		fp2.setVgap(50);
 		fp2.setPadding(new Insets(60,15,15,60));
 	
-		fp2.getChildren().addAll(back2, lb2, a); // test
+		fp2.getChildren().addAll(back2, lb2, anima);
 		
 		//asdfasdfasdf
 		
