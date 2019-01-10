@@ -2,10 +2,15 @@ package application;
 	
 import javafx.application.Application;
 import javafx.application.Platform; //fuer EXIT Button
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
@@ -20,6 +25,7 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage stage) throws Exception{
+		stage.setResizable(false);
 		/*--------------------------------
 		 * 
 		 * 1 Scene
@@ -41,13 +47,6 @@ public class Main extends Application {
 	    fp1.setVgap(50);
 	    fp1.setPadding(new Insets(60,15,15,60));	
 		
-	/*	//ANCHOR
-		AnchorPane ap = new AnchorPane();
-		ap.setTopAnchor(btnl, 40.0);
-		ap.setBottomAnchor(btnr, 40.0);
-		ap.setRightAnchor(btnl, 40.0);
-		Scene scene = new Scene(ap, 370, 150);
-		ap.getChildren().addAll(btnl, lb1, btnr); */
 	    
 	    fp1.getChildren().addAll(btnl,lb1, btnr);
 	    Scene scene = new Scene(fp1, 350,150);
@@ -86,7 +85,7 @@ public class Main extends Application {
 		fp2.setVgap(50);
 		fp2.setPadding(new Insets(60,15,15,60));
 	
-		fp2.getChildren().addAll(back2, anima);
+		fp2.getChildren().addAll(back2, lb2, anima);
 		
 		//asdfasdfasdf
 		
@@ -143,17 +142,71 @@ public class Main extends Application {
 	    Button back4 = new Button();
 	    back4.setText("Back");
 	    
-	    //Layout vierte Scene
-	    final FlowPane fp4 = new FlowPane();
-		final Scene fourthScene = new Scene(fp4, 370, 150);
-		fp4.setHgap(50);
-		fp4.setVgap(50);
-	    fp4.setPadding(new Insets(60,15,15,60));
+	    Button submit = new Button();
+	    submit.setText("Submit");
 	    
-	    TextField txt1 = new TextField( "Name" );
+	    // Output Table
+	    TableView table = new TableView();
+	    table.setEditable( false );
+	    table.setMinWidth(480);
+	    table.setMinHeight(200);
+	    
+        TableColumn BlockID = new TableColumn("Block ID");
+        TableColumn Timestamp = new TableColumn("Timestamp");
+        TableColumn Nonce = new TableColumn("Nonce");
+        
+        table.getColumns().addAll( BlockID, Timestamp, Nonce );
+	    
+	    //TextFelder
+	    TextField txt1 = new TextField();
+	    txt1.setText("Block ID");
 	    txt1.setMinWidth( 120.0 );
-	    	    
-	    fp4.getChildren().addAll(back4, lb4);
+	    
+	    TextField txt2 = new TextField();
+	    txt2.setText("Nonce");
+	    txt2.setMinWidth( 120.0 );
+	    
+	    TextArea txt3 = new TextArea();
+	    txt3.setText("Data");
+	    txt3.setMinWidth( 300.0 );
+	    txt3.setMinHeight( 100.0 );
+	    
+	    TextField txt4 = new TextField();
+	    txt4.setText("SHA256");
+	    txt4.setMinWidth( 480.0 );
+	  
+	   
+	    //Layout vierte Scene
+	    final AnchorPane fp4 = new AnchorPane();
+		Scene fourthScene = new Scene(fp4, 570, 360);
+		//fp4.setHgap(50);
+		//fp4.setVgap(50);
+	    fp4.setPadding(new Insets(60,15,15,60));
+	   
+		
+		fp4.setTopAnchor(txt1, -50.0);
+		fp4.setLeftAnchor(txt1, 1.0);
+		
+		fp4.setTopAnchor(txt2, -20.0);
+		fp4.setLeftAnchor(txt2, 1.0);
+		
+		fp4.setTopAnchor(txt3, 10.0);
+		fp4.setLeftAnchor(txt3, 1.0);
+		
+		fp4.setTopAnchor(txt4, 200.0);
+		fp4.setLeftAnchor(txt4, 1.0);
+		
+		fp4.setTopAnchor(back4, 250.0);
+		fp4.setLeftAnchor(back4, 1.0);
+		
+		fp4.setTopAnchor(submit, 250.0);
+		fp4.setRightAnchor(submit, 1.0);
+		
+		fp4.setTopAnchor( table, 300.0);
+		fp4.setLeftAnchor( table, 1.0);
+		
+		
+	    fp4.getChildren().addAll(txt1, txt2, txt3, txt4, back4, submit, table);
 	    stage.setScene(scene);
 	    stage.show();
 	    
@@ -162,6 +215,7 @@ public class Main extends Application {
 	  		
 	    //CSS Buttons
 	  	back4.setStyle("-fx-border-color: #ff0000; -fx-border-width: 5px;");
+	  	submit.setStyle("-fx-border-color: #ff0000; -fx-border-width: 5px;");
 	    
 		/*--------------------------------
 		 * 
@@ -203,7 +257,49 @@ public class Main extends Application {
 			stage.setScene(scene);
 			stage.setTitle("Menu");
 		});
+		// MOUSE Handler
+		txt1.setOnMouseClicked(new EventHandler<MouseEvent>(){
+			@Override
+			public void handle(MouseEvent event) {
+				
+				if( txt1.getText().equals( "Block ID") )
+					txt1.setText("");
+				else if( txt2.getText().isEmpty() )
+					txt1.setText("Block ID");
+			}  
+		   });
+		
+		txt2.setOnMouseClicked(new EventHandler<MouseEvent>(){
+			@Override
+			public void handle(MouseEvent event) {
+				if( txt2.getText().equals( "Nonce") )
+					txt2.setText("");
+				
+			}  
+		   });
+		txt3.setOnMouseClicked(new EventHandler<MouseEvent>(){
+			@Override
+			public void handle(MouseEvent event) {
+				if( txt3.getText().equals( "Data") )
+					txt3.setText("");		
+			}  
+		   });
+		txt4.setOnMouseClicked(new EventHandler<MouseEvent>(){
+			@Override
+			public void handle(MouseEvent event) {
+				if( txt4.getText().equals( "SHA256") )
+					txt4.setText("");		
+			}  
+		   });
+		
+		submit.setOnAction( e-> {
+			fourthScene.set 
+			
+		} );
+		
 	}
+	
+
 
 
 }
