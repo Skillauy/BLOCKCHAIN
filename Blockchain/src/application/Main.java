@@ -2,15 +2,18 @@ package application;
 	
 import javafx.application.Application;
 import javafx.application.Platform; //fuer EXIT Button
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonBase;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.geometry.Insets;
 
@@ -20,9 +23,9 @@ public class Main extends Application {
 		Application.launch();
 	}
 
-	int pcs;
 	@Override
 	public void start(Stage stage) throws Exception{
+		stage.setResizable(false);
 		/*--------------------------------
 		 * 
 		 * 1 Scene
@@ -44,13 +47,6 @@ public class Main extends Application {
 	    fp1.setVgap(50);
 	    fp1.setPadding(new Insets(60,15,15,60));	
 		
-	/*	//ANCHOR
-		AnchorPane ap = new AnchorPane();
-		ap.setTopAnchor(btnl, 40.0);
-		ap.setBottomAnchor(btnr, 40.0);
-		ap.setRightAnchor(btnl, 40.0);
-		Scene scene = new Scene(ap, 370, 150);
-		ap.getChildren().addAll(btnl, lb1, btnr); */
 	    
 	    fp1.getChildren().addAll(btnl,lb1, btnr);
 	    Scene scene = new Scene(fp1, 350,150);
@@ -73,58 +69,15 @@ public class Main extends Application {
 		 * --------------------------------*/	    
 		
 		//Komponenten fuer zweiten Scene
-		
-		// Input Valius
-		int pcs;
-		Integer miningSpeed;
-		Integer transaktions;
-		
-		int s2H = 600;
-		int s2V = 800;
-		
 		final Label lb2 = new Label();
-		lb2.setLayoutX(s2V/2);
-		lb2.setLayoutY(50);
 		lb2.setText("2. Scene");
-		
-		Button anima2 = new Button();
-		anima2.setLayoutX(s2V-100);
-		anima2.setLayoutY(s2H-100);
-		anima2.setText("Animation");
-		
+		Button anima = new Button();
+		anima.setText("Animation");
 		Button back2 = new Button();
-		back2.setLayoutX(50);
-		back2.setLayoutY(s2H-100);
 		back2.setText("Back");
 		
-		// Input variables
-		// Input Rchner zahl
-		final Label pcsT = new Label();
-		pcsT.setLayoutX(50);
-		pcsT.setLayoutY(100);
-		pcsT.setText("Wie viele Rechner:");
 		
-		TextField pcsInput = new TextField();
-		pcsInput.setLayoutX(300);
-		pcsInput.setLayoutY(100);
 		
-<<<<<<< HEAD
-		// Input mining speed
-		final Label miningSpeedT = new Label();
-		miningSpeedT.setLayoutX(50);
-		miningSpeedT.setLayoutY(150);
-		miningSpeedT.setText("Wie Schnell soll gemined werden:");
-		
-		TextField miningSpeedInput = new TextField();
-		miningSpeedInput.setLayoutX(300);
-		miningSpeedInput.setLayoutY(150);
-		
-		// Input mining speed
-		final Label transaktionsT = new Label();
-		transaktionsT.setLayoutX(50);
-		transaktionsT.setLayoutY(200);
-		transaktionsT.setText("Wie viele Transaktionen:");
-=======
 		//Layout fuer zweite Scene
 		final FlowPane fp2 = new FlowPane();
 		final Scene secondScene = new Scene(fp2, 370, 150);
@@ -132,41 +85,18 @@ public class Main extends Application {
 		fp2.setVgap(50);
 		fp2.setPadding(new Insets(60,15,15,60));
 	
-<<<<<<< HEAD
 		fp2.getChildren().addAll(back2, lb2, anima);
->>>>>>> 0e310c61a188d949191e3063acbbe590695488b1
 		
-		TextField transaktionsInput = new TextField();
-		transaktionsInput.setLayoutX(300);
-		transaktionsInput.setLayoutY(200);
-=======
-		fp2.getChildren().addAll(back2, anima);
->>>>>>> parent of 0e310c6... Test
+		//asdfasdfasdf
 		
-		//---------------------------------
-		ButtonBase submit = new Button();;
-		submit.setLayoutX(s2V-100);
-		submit.setLayoutY(s2H-200);
-		submit.setText("Submit");
-		submit.setOnAction(e -> {
-			this.pcs = Integer.valueOf(pcsInput.getText()).intValue();
-			System.out.println(this.pcs);
-            System.out.println(pcsInput.getText());
-            System.out.println(miningSpeedInput.getText());
-            System.out.println(transaktionsInput.getText());
-        });
-		
-		
-		//Layout fuer zweite Scene
-		final Pane s2 = new Pane();
-		s2.getChildren().addAll(back2,lb2, anima2, pcsT, pcsInput, miningSpeedT, miningSpeedInput, transaktionsT, transaktionsInput, submit);
-		final Scene secondScene = new Scene(s2, s2V, s2H);		
+		stage.setScene( scene );
+		stage.show();
 		
 		//CSS Stylesheet
 		secondScene.getStylesheets().add("style.css");
 		
 		//CSS Buttons
-		anima2.setStyle("-fx-border-color: #ff0000; -fx-border-width: 5px;");
+		anima.setStyle("-fx-border-color: #ff0000; -fx-border-width: 5px;");
 		back2.setStyle("-fx-border-color: #ff0000; -fx-border-width: 5px;");
 		
 		
@@ -190,6 +120,8 @@ public class Main extends Application {
 		fp3.setPadding(new Insets(60,15,15,60));
 	    
 		fp3.getChildren().addAll(back3, lb3);
+	    stage.setScene(scene);
+	    stage.show();
 	    
 	    //CSS Stylesheet
 	    thirdScene.getStylesheets().add("style.css");
@@ -210,7 +142,6 @@ public class Main extends Application {
 	    Button back4 = new Button();
 	    back4.setText("Back");
 	    
-<<<<<<< HEAD
 	    Button submit = new Button();
 	    submit.setText("Submit");
 	    
@@ -230,10 +161,6 @@ public class Main extends Application {
 	    TextField txt1 = new TextField();
 	    txt1.setText("Block ID");
 	    txt1.setMinWidth( 120.0 );
-<<<<<<< HEAD
-	    	    
-	    fp4.getChildren().addAll(back4, lb4);
-=======
 	    
 	    TextField txt2 = new TextField();
 	    txt2.setText("Nonce");
@@ -249,28 +176,46 @@ public class Main extends Application {
 	    txt4.setMinWidth( 480.0 );
 	  
 	   
-=======
->>>>>>> parent of 0e310c6... Test
 	    //Layout vierte Scene
-	    final FlowPane fp4 = new FlowPane();
-		final Scene fourthScene = new Scene(fp4, 370, 150);
-		fp4.setHgap(50);
-		fp4.setVgap(50);
+	    final AnchorPane fp4 = new AnchorPane();
+		Scene fourthScene = new Scene(fp4, 570, 360);
+		//fp4.setHgap(50);
+		//fp4.setVgap(50);
 	    fp4.setPadding(new Insets(60,15,15,60));
-	    
-	    TextField txt1 = new TextField( "Name" );
-	    txt1.setMinWidth( 120.0 );
-	    	    
-	    fp4.getChildren().addAll(back4, lb4);
+	   
+		
+		fp4.setTopAnchor(txt1, -50.0);
+		fp4.setLeftAnchor(txt1, 1.0);
+		
+		fp4.setTopAnchor(txt2, -20.0);
+		fp4.setLeftAnchor(txt2, 1.0);
+		
+		fp4.setTopAnchor(txt3, 10.0);
+		fp4.setLeftAnchor(txt3, 1.0);
+		
+		fp4.setTopAnchor(txt4, 200.0);
+		fp4.setLeftAnchor(txt4, 1.0);
+		
+		fp4.setTopAnchor(back4, 250.0);
+		fp4.setLeftAnchor(back4, 1.0);
+		
+		fp4.setTopAnchor(submit, 250.0);
+		fp4.setRightAnchor(submit, 1.0);
+		
+		fp4.setTopAnchor( table, 300.0);
+		fp4.setLeftAnchor( table, 1.0);
+		
+		
+	    fp4.getChildren().addAll(txt1, txt2, txt3, txt4, back4, submit, table);
 	    stage.setScene(scene);
 	    stage.show();
->>>>>>> 0e310c61a188d949191e3063acbbe590695488b1
 	    
 	    //CSS Stylesheet
 	    fourthScene.getStylesheets().add("style.css");
 	  		
 	    //CSS Buttons
 	  	back4.setStyle("-fx-border-color: #ff0000; -fx-border-width: 5px;");
+	  	submit.setStyle("-fx-border-color: #ff0000; -fx-border-width: 5px;");
 	    
 		/*--------------------------------
 		 * 
@@ -292,8 +237,7 @@ public class Main extends Application {
 		});
 	  	
 		//Animation Button
-		anima2.setOnAction(e -> {
-			helpF(stage);
+		anima.setOnAction(e -> {
 			stage.setScene(thirdScene);
 			stage.setTitle("Animation");
 		});
@@ -313,16 +257,6 @@ public class Main extends Application {
 			stage.setScene(scene);
 			stage.setTitle("Menu");
 		});
-<<<<<<< HEAD
-<<<<<<< HEAD
-		
-		stage.setScene(scene);
-	    stage.show();
-	}
-	
-	public void helpF(Stage stage) {
-		stage = new Stage();
-=======
 		// MOUSE Handler
 		txt1.setOnMouseClicked(new EventHandler<MouseEvent>(){
 			@Override
@@ -363,10 +297,9 @@ public class Main extends Application {
 			
 		} );
 		
->>>>>>> 0e310c61a188d949191e3063acbbe590695488b1
-=======
->>>>>>> parent of 0e310c6... Test
 	}
+	
+
 
 
 }
