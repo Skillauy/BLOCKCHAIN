@@ -146,6 +146,9 @@ public class Main extends Application {
 		fp4.setVgap(50);
 	    fp4.setPadding(new Insets(60,15,15,60));
 	    
+	    TextField txt1 = new TextField( "Name" );
+	    txt1.setMinWidth( 120.0 );
+	    	    
 	    fp4.getChildren().addAll(back4, lb4);
 	    stage.setScene(scene);
 	    stage.show();
