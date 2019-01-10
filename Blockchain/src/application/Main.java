@@ -4,11 +4,13 @@ import javafx.application.Application;
 import javafx.application.Platform; //fuer EXIT Button
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBase;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.geometry.Insets;
 
@@ -18,6 +20,7 @@ public class Main extends Application {
 		Application.launch();
 	}
 
+	int pcs;
 	@Override
 	public void start(Stage stage) throws Exception{
 		/*--------------------------------
@@ -70,34 +73,85 @@ public class Main extends Application {
 		 * --------------------------------*/	    
 		
 		//Komponenten fuer zweiten Scene
+		
+		// Input Valius
+		int pcs;
+		Integer miningSpeed;
+		Integer transaktions;
+		
+		int s2H = 600;
+		int s2V = 800;
+		
 		final Label lb2 = new Label();
+		lb2.setLayoutX(s2V/2);
+		lb2.setLayoutY(50);
 		lb2.setText("2. Scene");
-		Button anima = new Button();
-		anima.setText("Animation");
+		
+		Button anima2 = new Button();
+		anima2.setLayoutX(s2V-100);
+		anima2.setLayoutY(s2H-100);
+		anima2.setText("Animation");
+		
 		Button back2 = new Button();
+		back2.setLayoutX(50);
+		back2.setLayoutY(s2H-100);
 		back2.setText("Back");
 		
+		// Input variables
+		// Input Rchner zahl
+		final Label pcsT = new Label();
+		pcsT.setLayoutX(50);
+		pcsT.setLayoutY(100);
+		pcsT.setText("Wie viele Rechner:");
+		
+		TextField pcsInput = new TextField();
+		pcsInput.setLayoutX(300);
+		pcsInput.setLayoutY(100);
+		
+		// Input mining speed
+		final Label miningSpeedT = new Label();
+		miningSpeedT.setLayoutX(50);
+		miningSpeedT.setLayoutY(150);
+		miningSpeedT.setText("Wie Schnell soll gemined werden:");
+		
+		TextField miningSpeedInput = new TextField();
+		miningSpeedInput.setLayoutX(300);
+		miningSpeedInput.setLayoutY(150);
+		
+		// Input mining speed
+		final Label transaktionsT = new Label();
+		transaktionsT.setLayoutX(50);
+		transaktionsT.setLayoutY(200);
+		transaktionsT.setText("Wie viele Transaktionen:");
+		
+		TextField transaktionsInput = new TextField();
+		transaktionsInput.setLayoutX(300);
+		transaktionsInput.setLayoutY(200);
+		
+		//---------------------------------
+		ButtonBase submit = new Button();;
+		submit.setLayoutX(s2V-100);
+		submit.setLayoutY(s2H-200);
+		submit.setText("Submit");
+		submit.setOnAction(e -> {
+			this.pcs = Integer.valueOf(pcsInput.getText()).intValue();
+			System.out.println(this.pcs);
+            System.out.println(pcsInput.getText());
+            System.out.println(miningSpeedInput.getText());
+            System.out.println(transaktionsInput.getText());
+        });
 		
 		
 		//Layout fuer zweite Scene
-		final FlowPane fp2 = new FlowPane();
-		final Scene secondScene = new Scene(fp2, 370, 150);
-		fp2.setHgap(50);
-		fp2.setVgap(50);
-		fp2.setPadding(new Insets(60,15,15,60));
-	
-		fp2.getChildren().addAll(back2, anima);
-		
-		//asdfasdfasdf
-		
-		stage.setScene( scene );
-		stage.show();
+		final Pane s2 = new Pane();
+		s2.getChildren().addAll(back2,lb2, anima2, pcsT, pcsInput, miningSpeedT, miningSpeedInput, transaktionsT, transaktionsInput, submit);
+		final Scene secondScene = new Scene(s2, s2V, s2H);		
 		
 		//CSS Stylesheet
 		secondScene.getStylesheets().add("style.css");
 		
 		//CSS Buttons
-		anima.setStyle("-fx-border-color: #ff0000; -fx-border-width: 5px;");
+		anima2.setStyle("-fx-border-color: #ff0000; -fx-border-width: 5px;");
 		back2.setStyle("-fx-border-color: #ff0000; -fx-border-width: 5px;");
 		
 		
@@ -121,8 +175,6 @@ public class Main extends Application {
 		fp3.setPadding(new Insets(60,15,15,60));
 	    
 		fp3.getChildren().addAll(back3, lb3);
-	    stage.setScene(scene);
-	    stage.show();
 	    
 	    //CSS Stylesheet
 	    thirdScene.getStylesheets().add("style.css");
@@ -154,8 +206,6 @@ public class Main extends Application {
 	    txt1.setMinWidth( 120.0 );
 	    	    
 	    fp4.getChildren().addAll(back4, lb4);
-	    stage.setScene(scene);
-	    stage.show();
 	    
 	    //CSS Stylesheet
 	    fourthScene.getStylesheets().add("style.css");
@@ -183,7 +233,8 @@ public class Main extends Application {
 		});
 	  	
 		//Animation Button
-		anima.setOnAction(e -> {
+		anima2.setOnAction(e -> {
+			helpF(stage);
 			stage.setScene(thirdScene);
 			stage.setTitle("Animation");
 		});
@@ -203,6 +254,13 @@ public class Main extends Application {
 			stage.setScene(scene);
 			stage.setTitle("Menu");
 		});
+		
+		stage.setScene(scene);
+	    stage.show();
+	}
+	
+	public void helpF(Stage stage) {
+		stage = new Stage();
 	}
 
 
